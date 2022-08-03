@@ -6,7 +6,10 @@ public class TestMatchingBrackets {
      * has a matching closing bracket
      */
     public static boolean doBracketsMatch(String b) {
-
+int total = Integer.par
+    	for (int i = 0; i < b.chars(); i++) {
+	
+}
         return false;
     }
 }

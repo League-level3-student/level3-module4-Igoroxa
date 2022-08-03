@@ -1,39 +1,96 @@
 package _00_IntroToStacks;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Stack;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class _02_TextUndoRedo {
-    /* 
-     * Create a JFrame with a JPanel and a JLabel.
-     * 
-     * Every time a key is pressed, add that character to the JLabel. It should
-     * look like a basic text editor.
-     * 
-     * Make it so that every time the BACKSPACE key is pressed, the last
-     * character is erased from the JLabel.
-     * 
-     * Save that deleted character onto a Stack of Characters.
-     * 
-     * Choose a key to be the Undo key. Make it so that when that key is
-     * pressed, the top Character is popped  off the Stack and added back to
-     * the JLabel.
-     */
+public class _02_TextUndoRedo implements KeyListener, ActionListener {
+	/*
+	 * Create a JFrame with a JPanel and a JLabel.
+	 * 
+	 * Every time a key is pressed, add that character to the JLabel. It should look
+	 * like a basic text editor.
+	 * 
+	 * Make it so that every time the BACKSPACE key is pressed, the last character
+	 * is erased from the JLabel.
+	 * 
+	 * Save that deleted character onto a Stack of Characters.
+	 * 
+	 * Choose a key to be the Undo key. Make it so that when that key is pressed,
+	 * the top Character is popped off the Stack and added back to the JLabel.
+	 */
 	public static void main(String[] args) {
-JFrame frame = new JFrame("Text Editor");
-JPanel panel = new JPanel();
-JLabel label = new JLabel();
-frame.setVisible(true);
-frame.add(panel);
-panel.add(label);
-frame.addKeyListener(null);
+		_02_TextUndoRedo texteditor = new _02_TextUndoRedo();
+		texteditor.setup();
+
+	}
+
+	Stack<Character> chars = new Stack<Character>();
+	
+	Stack<Character> deleted = new Stack<Character>();
+	JFrame frame = new JFrame("Text Editor");
+	JPanel panel = new JPanel();
+	JLabel label = new JLabel();
+	JButton button = new JButton("Undo");
+	KeyListener key;
+
+	void setup() {
+
+		chars.push(' ');
+		label.getKeyListeners();
+		frame.setVisible(true);
+		frame.add(panel);
+		panel.add(label);
+		panel.add(button);
+		frame.pack();
+		label.addKeyListener(this);
+		button.addActionListener(this);
+		label.setText(chars.toString());
+		System.out.println(chars);
 
 
-Stack<Character> chars = new Stack<Character>();
+	}
 
-}
+	@Override
+	public void keyPressed(KeyEvent e) {
+		System.out.println("works");
+		// TODO Auto-generated method stub
+		if (e.getKeyCode() != 8) {
+			chars.push(e.getKeyChar());
+			System.out.println("yes");
 
+		}
+		if (e.getKeyCode() == 8) {
+			chars.pop();
+			deleted.push(e.getKeyChar());
+			
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent f) {
+		// TODO Auto-generated method stub
+		if (f.getSource() == button) {
+			chars.add(deleted.pop());
+		}
+	}
 }
