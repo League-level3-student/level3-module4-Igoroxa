@@ -43,6 +43,7 @@ public class _02_TextUndoRedo implements KeyListener, ActionListener {
 	void setup() {
 
 		chars.push(' ');
+		deleted.push(' ');
 		frame.setVisible(true);
 		frame.add(panel);
 		panel.add(label);
@@ -51,62 +52,55 @@ public class _02_TextUndoRedo implements KeyListener, ActionListener {
 		frame.addKeyListener(this);
 		panel.addKeyListener(this);
 		button.addActionListener(this);
-		label.setText(chars.toString());
 		System.out.println(chars);
 		frame.pack();
 		KeyListener[] arcs = frame.getKeyListeners();
+		frame.requestFocusInWindow();
 
 
 	}
-//
-//	@Override
-//	public void keyPressed(KeyEvent e) {
-//		System.out.println("works");
-//		// TODO Auto-generated method stub
-//		if (e.getKeyCode() != 8) {
-//			chars.push(e.getKeyChar());
-//			System.out.println("yes");
-//
-//		}
-//		if (e.getKeyCode() == 8) {
-//			chars.pop();
-//			deleted.push(e.getKeyChar());
-//			
-//		}
-//	}
-//
-//	@Override
-//	public void keyReleased(KeyEvent e) {
-//		// TODO Auto-generated method stub
-//
-//	}
-//
-//	@Override
-//	public void keyTyped(KeyEvent e) {
-//		// TODO Auto-generated method stub
-//
-//	}
 
 	@Override
-	public void actionPerformed(ActionEvent f) {
+	public void keyPressed(KeyEvent e) {
+		System.out.println("works");
 		// TODO Auto-generated method stub
-		if (f.getSource() == button) {
-			chars.add(deleted.pop());
+		if (e.getKeyCode() != 8) {
+			chars.push(e.getKeyChar());
+			System.out.println("yes");
+			label.setText(chars.toString());
+
+		}
+		if (e.getKeyCode() == 8) {
+			chars.pop();
+			deleted.push(chars.pop());
+			label.setText(chars.toString());
+			
+		}
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getSource() == button) {
+			char dele = deleted.pop();
+			chars.push(dele);
+			label.setText(chars.toString());
+			
 		}
 	}
-@Override
-public void keyPressed(KeyEvent arg0) {
-	System.out.println("best");
-	
-}
-@Override
-public void keyReleased(KeyEvent arg0) {
-	// TODO Auto-generated method stub
-	
-}
-@Override
-public void keyTyped(KeyEvent arg0) {
-	// TODO Auto-generated method stub
-	
-}
+
+
 }
