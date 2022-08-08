@@ -39,52 +39,53 @@ public class _02_TextUndoRedo implements KeyListener, ActionListener {
 	JPanel panel = new JPanel();
 	JLabel label = new JLabel();
 	JButton button = new JButton("Undo");
-	KeyListener key;
 
 	void setup() {
 
 		chars.push(' ');
-		label.getKeyListeners();
 		frame.setVisible(true);
 		frame.add(panel);
 		panel.add(label);
 		panel.add(button);
 		frame.pack();
-		label.addKeyListener(this);
+		frame.addKeyListener(this);
+		panel.addKeyListener(this);
 		button.addActionListener(this);
 		label.setText(chars.toString());
 		System.out.println(chars);
+		frame.pack();
+		KeyListener[] arcs = frame.getKeyListeners();
 
 
 	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		System.out.println("works");
-		// TODO Auto-generated method stub
-		if (e.getKeyCode() != 8) {
-			chars.push(e.getKeyChar());
-			System.out.println("yes");
-
-		}
-		if (e.getKeyCode() == 8) {
-			chars.pop();
-			deleted.push(e.getKeyChar());
-			
-		}
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
+//
+//	@Override
+//	public void keyPressed(KeyEvent e) {
+//		System.out.println("works");
+//		// TODO Auto-generated method stub
+//		if (e.getKeyCode() != 8) {
+//			chars.push(e.getKeyChar());
+//			System.out.println("yes");
+//
+//		}
+//		if (e.getKeyCode() == 8) {
+//			chars.pop();
+//			deleted.push(e.getKeyChar());
+//			
+//		}
+//	}
+//
+//	@Override
+//	public void keyReleased(KeyEvent e) {
+//		// TODO Auto-generated method stub
+//
+//	}
+//
+//	@Override
+//	public void keyTyped(KeyEvent e) {
+//		// TODO Auto-generated method stub
+//
+//	}
 
 	@Override
 	public void actionPerformed(ActionEvent f) {
@@ -93,4 +94,19 @@ public class _02_TextUndoRedo implements KeyListener, ActionListener {
 			chars.add(deleted.pop());
 		}
 	}
+@Override
+public void keyPressed(KeyEvent arg0) {
+	System.out.println("best");
+	
+}
+@Override
+public void keyReleased(KeyEvent arg0) {
+	// TODO Auto-generated method stub
+	
+}
+@Override
+public void keyTyped(KeyEvent arg0) {
+	// TODO Auto-generated method stub
+	
+}
 }
