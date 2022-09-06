@@ -18,19 +18,21 @@ public class Hangman implements KeyListener {
 	JFrame frame = new JFrame("HangMan");
 	JPanel panel = new JPanel();
 	JLabel label = new JLabel();
+	JLabel score = new JLabel();
 	String secrets = null;
 	char[] secret;
 	char[] actual;
 	String temp2;
 	String word;
+	int lives = 10;
 
 	void run() {
 
 		frame.setVisible(true);
-		int lives = 10;
 
 		frame.add(panel);
 		panel.add(label);
+		panel.add(score);
 
 		frame.addKeyListener(this);
 
@@ -69,6 +71,13 @@ public class Hangman implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+		lives--;
+		String livestext = Integer.toString(lives);
+		score.setText("Score: " + livestext);
+		frame.pack();
+		if(lives == 0) {
+			JOptionPane.showMessageDialog(null, "You lost the game");
+		}
 		char pressed = e.getKeyChar();
 		System.out.println(pressed);
 		//System.out.println(actual);
